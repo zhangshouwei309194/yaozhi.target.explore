@@ -1,0 +1,189 @@
+---
+title: "靶点`r params$target`药智网调研(ADC)"
+author: "BI in C-Ray Therapeutics"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    number_sections: false
+    df_print: paged
+    theme: cerulean
+    highlight: tango
+    fig_width: 7
+    fig_height: 6
+params:
+  target: "CCR8"
+---
+
+<style>
+p.caption {
+    font-size: 1.5em;
+}
+</style>
+
+# 一、简要
+&emsp;&emsp;本文档主要针对药物靶点，通过[药智网](https://db.yaozh.com/)调研，输出药智网关于该靶点在研药物和临床研究的信息收集，同时筛选有关ADC相关的信息。
+
+# 二、靶点相关的研发药物
+```{r echo=FALSE}
+    file_path <- paste0("table/results_", params$target, ".globaldrugs.format.xlsx")
+    data <- read.xlsx(file_path)
+    title_name <- colnames(data)
+
+    sketch <- htmltools::withTags(table(
+        class="display",
+        thead(
+            tr(
+                th(colspan=6, "")
+            ),
+            tr(
+                lapply(title_name, th)
+            )
+        )
+    ))
+
+DT::datatable(data, container=sketch, rownames=FALSE,caption="表1 全球药物统计 ", options=list(columnDefs=list(list(className="dt-center", targets=0:5)),
+lengthMenu = list(c(2, 5, 10, 20, 50, 100, -1),
+c('2', '5', '10', '20', '50', '100', 'All'))))
+```
+```{r echo=FALSE, results='asis'}
+# 将 Excel 文件转换为 base64 编码
+  file_path <- paste0("table/results_", params$target, ".globaldrugs.format.xlsx")
+  excel_data <- base64enc::base64encode(file_path)
+  download_name <- paste0(params$target, "_全球药物统计.xlsx")
+  cat('<center>
+<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,', 
+      excel_data, 
+      '" download="', download_name, '">点击下载附件*', params$target, '全球药物统计*</a>  
+</center>', sep = "")
+```
+
+## 药物类别和临床研究阶段统计{.tabset}
+### 药物类别
+<center>
+```{r,echo=FALSE,dpi=300,out.width="80%",out.height="80%"}
+knitr::include_graphics("img/global_drugs.drug_type.piechart.png")
+```
+</center>
+
+
+### 临床研究阶段
+<center>
+```{r,echo=FALSE,dpi=300,out.width="80%",out.height="80%"}
+knitr::include_graphics("img/global_drugs.clinical_stage.piechart.png")
+```
+</center>
+
+
+# 三、靶点临床试验
+```{r echo=FALSE}
+    file_path <- paste0("table/results_", params$target, ".clinical_analysis.format.xlsx")
+    data <- read.xlsx(file_path)
+    title_name <- colnames(data)
+
+    sketch <- htmltools::withTags(table(
+        class="display",
+        thead(
+            tr(
+                th(colspan=6, "")
+            ),
+            tr(
+                lapply(title_name, th)
+            )
+        )
+    ))
+
+DT::datatable(data, container=sketch, rownames=FALSE,caption="表2 临床试验信息",escape = FALSE, options=list(columnDefs=list(list(className="dt-center", targets=0:5)),
+lengthMenu = list(c(2, 5, 10, 20, 50, 100, -1),
+c('2', '5', '10', '20', '50', '100', 'All'))))
+```
+```{r echo=FALSE, results='asis'}
+# 将 Excel 文件转换为 base64 编码
+  file_path <- paste0("table/results_", params$target, ".clinical_analysis.format.xlsx")
+  excel_data <- base64enc::base64encode(file_path)
+  download_name <- paste0(params$target, "_临床试验信息.xlsx")
+  cat('<center>
+<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,', 
+      excel_data,
+      '" download="', download_name, '">点击下载附件*', params$target, '临床试验信息*</a> 
+</center>', sep = "")
+```
+
+## 临床研究阶段统计
+### 临床研究阶段
+<center>
+```{r,echo=FALSE,dpi=300,out.width="80%",out.height="80%"}
+knitr::include_graphics("img/clinical.clinical_stage.piechart.png")
+```
+</center>
+
+# 四、ADC相关药物和临床试验
+## ADC相关药物
+```{r echo=FALSE}
+    file_path <- paste0("table/results_", params$target, ".globaldrugs.ADC.format.xlsx")
+    data <- read.xlsx(file_path)
+    title_name <- colnames(data)
+
+    sketch <- htmltools::withTags(table(
+        class="display",
+        thead(
+            tr(
+                th(colspan=6, "")
+            ),
+            tr(
+                lapply(title_name, th)
+            )
+        )
+    ))
+
+DT::datatable(data, container=sketch, rownames=FALSE,caption="表3 全球ADC药物统计 ", options=list(columnDefs=list(list(className="dt-center", targets=0:5)),
+lengthMenu = list(c(2, 5, 10, 20, 50, 100, -1),
+c('2', '5', '10', '20', '50', '100', 'All'))))
+```
+```{r echo=FALSE, results='asis'}
+# 将 Excel 文件转换为 base64 编码
+  file_path <- paste0("table/results_", params$target, ".globaldrugs.ADC.format.xlsx")
+  excel_data <- base64enc::base64encode(file_path)
+  download_name <- paste0(params$target, "_全球ADC药物统计.xlsx")
+  cat('<center>
+<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,', 
+      excel_data,
+      '" download="', download_name, '">点击下载附件*', params$target, '全球ADC药物统计*</a>  
+</center>', sep = "")
+```
+
+## ADC相关临床试验
+```{r echo=FALSE}
+    file_path <- paste0("table/results_", params$target, ".ADC.clinical_analysis.format.xlsx")
+    data <- read.xlsx(file_path)
+    title_name <- colnames(data)
+
+    sketch <- htmltools::withTags(table(
+        class="display",
+        thead(
+            tr(
+                th(colspan=6, "")
+            ),
+            tr(
+                lapply(title_name, th)
+            )
+        )
+    ))
+
+DT::datatable(data, container=sketch, rownames=FALSE,caption="表4 ADC临床试验信息",escape = FALSE, options=list(columnDefs=list(list(className="dt-center", targets=0:5)),
+lengthMenu = list(c(2, 5, 10, 20, 50, 100, -1),
+c('2', '5', '10', '20', '50', '100', 'All'))))
+```
+```{r echo=FALSE, results='asis'}
+# 将 Excel 文件转换为 base64 编码
+  file_path <- paste0("table/results_", params$target, ".ADC.clinical_analysis.format.xlsx")
+  excel_data <- base64enc::base64encode(file_path)
+  download_name <- paste0(params$target, "_ADC临床试验信息.xlsx")
+  cat('<center>
+<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,', 
+      excel_data,
+      '" download="', download_name, '">点击下载附件*', params$target, 'ADC临床试验信息*</a>
+</center>', sep = "")
+```
