@@ -1,6 +1,7 @@
 
 # 环境配置
 ** 需要ubuntu操作系统，方别使用playwright进行浏览器自动化操作**
+
 需在集群配置X11
 
 **python3及python环境包:**
