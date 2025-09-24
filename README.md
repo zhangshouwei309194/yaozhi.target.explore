@@ -1,35 +1,34 @@
 
 # 环境配置
-**1 需要ubuntu操作系统，方别使用playwright进行浏览器自动化操作**
+** 需要ubuntu操作系统，方别使用playwright进行浏览器自动化操作**
 需在集群配置X11
 
 **python3及python环境包:**
-asyncio 
-os 
-dotenv 
-playwright
-json
-bs4
-xlsxwriter
-pandas
-numpy
-sys
-re
-glob
-shutil
-pathlib
-argparse
-argparse
+asyncio,
+os, 
+dotenv,
+playwright,
+json,
+bs4,
+xlsxwriter,
+pandas,
+numpy,
+sys,
+re,
+glob,
+shutil,
+pathlib,
+argparse,
 
 **R环境包（r4.3）**
-rmarkdown
-knitr
-ggplot2
-DT
-flextable
-dplyr
-openxlsx
-base64enc
+rmarkdown,
+knitr,
+ggplot2,
+DT,
+flextable,
+dplyr,
+openxlsx,
+base64enc,
 
 # 运行示例
 ## 基于靶点查询该靶点药物信息及临床试验信息的运行示例
