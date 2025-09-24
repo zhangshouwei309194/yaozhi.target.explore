@@ -4,9 +4,9 @@
 需在集群配置X11
 
 **python3及python环境包:**
-asyncio
-os
-dotenv
+asyncio 
+os 
+dotenv 
 playwright
 json
 bs4
